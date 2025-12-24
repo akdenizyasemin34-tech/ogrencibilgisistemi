@@ -34,4 +34,8 @@ public class Course {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
+
+    public double calculateTuition() {
+        return 10000.0;
+    }
 }

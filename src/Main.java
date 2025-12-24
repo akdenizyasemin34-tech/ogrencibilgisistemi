@@ -15,5 +15,14 @@ public class Main {
         ders2.setInstructor(hoca2);
 
         System.out.println(ders2.toString());
+
+        System.out.println("--------------------------------");
+
+        Student ogr1 = new Student(240309013, "Cagri Akdeniz");
+        System.out.println(ogr1.toString() + " Harc Bedeli: " + ogr1.calculateTuition() + " TL");
+
+        GraduateStudent ogr2 = new GraduateStudent(240309017, "Ertugrul Veli Akin", "Siber Guvenlik");
+        System.out.println("Yuksek Lisans: " + ogr2.toString() + " Harc Bedeli: " + ogr2.calculateTuition() + " TL");
+        System.out.println("Tez Konusu: " + ogr2.getThesis());
     }
 }
