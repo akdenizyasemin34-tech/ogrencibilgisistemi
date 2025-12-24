@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Student {
+public class Student implements Registrable {
     private int id;
     private String name;
     private ArrayList<Course> registeredCourses;
@@ -17,14 +17,20 @@ public class Student {
     }
 
     public double calculateTuition() {
-        return 10000;
+        return 10000.0;
     }
 
     public String getName() {
         return name;
     }
+
     @Override
     public String toString() {
         return name + " (" + id + ")";
+    }
+
+    @Override
+    public String getRegistrationInfo() {
+        return "Ogrenci Kayit Bilgisi: " + name + " (ID: " + id + ")";
     }
 }
