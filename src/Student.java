@@ -21,14 +21,21 @@ public class Student implements Registrable {
         return 4000.0;
     }
 
+    @Override
     public void registerCourse(Course course) {
-        this.courses.add(course);
-        System.out.println(this.getName() + " isimli öğrenci " + course.getName() + " dersine basariyla kayit oldu.");
+
+        if (this.courses.contains(course)) {
+            System.out.println("HATA: " + this.name + " zaten " + course.getName() + " dersine kayıtlı!");
+        }
+        else {
+            this.courses.add(course);
+            System.out.println(this.name + " isimli öğrenci " + course.getName() + " dersine başarıyla kayıt oldu.");
+        }
     }
 
     @Override
     public String getRegistrationInfo() {
-        return "Öğrenci Kayit Bilgisi: " + name + " (ID: " + id + ")";
+        return "Ogrenci Kayit Bilgisi: " + name + " (ID: " + id + ")";
     }
 
     @Override

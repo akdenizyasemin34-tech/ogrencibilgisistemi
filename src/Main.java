@@ -30,6 +30,8 @@ public class Main {
         System.out.println("\n--- DERS KAYIT TESTI ---");
 
         ogr1.registerCourse(ders1);
+        ogr1.registerCourse(ders1);
+
         ogr1.registerCourse(ders2);
         ogr2.registerCourse(ders2);
 
