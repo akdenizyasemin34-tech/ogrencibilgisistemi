@@ -55,4 +55,8 @@ public class Student implements Registrable {
             System.out.println("-------------------------------------");
         }
     }
+
+    public java.util.List<Course> getCourses(){
+        return courses;
+    }
 }
