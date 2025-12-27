@@ -1,44 +1,49 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Course ders1 = new Course("LBLM203", "Nesne Tabanli Programlama", 4);
 
-        Instructor hoca1 = new Instructor("Tugberk Kocatekin", "Bilgisayar Bilimleri");
+        Scanner scanner = new Scanner(System.in);
 
-        ders1.setInstructor(hoca1);
+        System.out.println("==========================================");
+        System.out.println("--- ÖĞRENCİ KAYIT SİSTEMİNE HOŞ GELDİNİZ ---");
+        System.out.println("==========================================\n");
 
-        System.out.println(ders1.toString());
+        System.out.print("Lütfen öğrencinin Adını ve Soyadını giriniz: ");
+        String ogrenciAdi = scanner.nextLine();
 
-        Course ders2 = new Course("LBLM201", "Veri Yapilari", 4);
-
-        Instructor hoca2 = new Instructor("Sibel Birtane Akar", "Bilgisayar Bilimleri");
-
-        ders2.setInstructor(hoca2);
-
-        System.out.println(ders2.toString());
+        System.out.print("Öğrenci Numarasını giriniz: ");
+        int ogrenciId = scanner.nextInt();
 
 
-        System.out.println("--------------------------------");
-
-        Student ogr1 = new Student(240309013, "Cagri Akdeniz");
-        System.out.println(ogr1.toString() + " Harc Bedeli: " + ogr1.calculateTuition() + " TL");
-
-        GraduateStudent ogr2 = new GraduateStudent(240309017, "Ertugrul Veli Akin", "Siber Guvenlik");
-        System.out.println("Yuksek Lisans: " + ogr2.toString() + " Harc Bedeli: " + ogr2.calculateTuition() + " TL");
-        System.out.println("Tez Konusu: " + ogr2.getThesis());
+        scanner.nextLine();
 
 
-        System.out.println("\n--- DERS KAYIT TESTI ---");
+        Student yeniOgrenci = new Student(ogrenciId, ogrenciAdi);
+        System.out.println("\n Giriş Başarılı! Hoş geldin, " + yeniOgrenci.getName());
 
-        ogr1.registerCourse(ders1);
-        ogr1.registerCourse(ders1);
 
-        ogr1.registerCourse(ders2);
-        ogr2.registerCourse(ders2);
+        System.out.println("\n--- DERS KAYIT EKRANI ---");
+        System.out.print("Eklemek istediğiniz Dersin Kodunu giriniz : ");
+        String dersKodu = scanner.nextLine();
 
-        System.out.println("\n--- DERS LISTELEME TESTI ---");
+        System.out.print("Dersin Adını giriniz: ");
+        String dersAdi = scanner.nextLine();
 
-        ogr1.listCourses();
+        System.out.print("Dersin Kredisini giriniz: ");
+        int dersKredi = scanner.nextInt();
 
-        ogr2.listCourses();
+
+        Course yeniDers = new Course(dersKodu, dersAdi, dersKredi);
+
+        yeniOgrenci.registerCourse(yeniDers);
+
+
+        System.out.println("\n==========================================");
+        System.out.println("--- GÜNCEL DURUM RAPORU ---");
+        yeniOgrenci.listCourses();
+        System.out.println("==========================================");
+
+        scanner.close();
     }
 }
