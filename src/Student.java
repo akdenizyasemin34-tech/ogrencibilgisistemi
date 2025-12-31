@@ -30,19 +30,21 @@ public class Student implements Registrable {
         }
     }
 
-    // --- YENİ EKLENEN METOD (DERS SİLME) ---
+
+
     public boolean dropCourse(String courseCode) {
-        // Listedeki dersleri tek tek kontrol ediyoruz
+
         for (Course course : this.courses) {
-            // Eğer aranan kod (büyük/küçük harf farketmeksizin) eşleşirse
+
             if (course.getCode().equalsIgnoreCase(courseCode)) {
-                this.courses.remove(course); // Dersi listeden sil
-                return true; // İşlem başarılı
+                this.courses.remove(course);
+                return true;
             }
         }
-        return false; // Ders bulunamadı
+        return false;
     }
-    // ---------------------------------------
+
+
 
     @Override
     public String getRegistrationInfo() {
@@ -61,7 +63,6 @@ public class Student implements Registrable {
             System.out.println("-------------------------------------");
             System.out.println(this.getName() + " isimli ogrencinin aldigi dersler:");
             for (Course course : this.courses) {
-                // Listeleme yaparken kodunu da gösterelim ki silerken kolaylık olsun
                 System.out.println(" - [" + course.getCode() + "] " + course.getName());
             }
             System.out.println("-------------------------------------");
