@@ -3,6 +3,8 @@ import java.util.InputMismatchException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +16,6 @@ public class Main {
 
         String adSoyad;
         int id = 0;
-
 
         while (true) {
             try {
@@ -37,7 +38,6 @@ public class Main {
 
         boolean devamEtsinMi = true;
 
-
         while (devamEtsinMi) {
             System.out.println("\n-----------------------");
             System.out.println("       ANA MENÜ");
@@ -46,6 +46,7 @@ public class Main {
             System.out.println("2 - Aldığım Dersleri Listele");
             System.out.println("3 - Ders Sil");
             System.out.println("4 - Dosyadan Dersleri Yükle");
+            System.out.println("5 - Listeyi Dosyaya Kaydet (GÜNCELLE)");
             System.out.println("0 - Sistemden Çıkış Yap");
             System.out.print("Seçiminiz: ");
 
@@ -61,6 +62,7 @@ public class Main {
             }
 
             if (secim == 1) {
+
                 System.out.print("Ders Kodu: ");
                 String kod = scanner.nextLine();
 
@@ -102,7 +104,9 @@ public class Main {
 
             } else if (secim == 4) {
 
-                String dosyaYolu = "courses.csv";
+
+
+                String dosyaYolu = "C:\\Users\\Çağrı\\IdeaProjects\\CourseRegistrationSystem\\courses.csv";
                 String satir = "";
 
                 try (BufferedReader br = new BufferedReader(new FileReader(dosyaYolu))) {
@@ -112,22 +116,15 @@ public class Main {
 
                         String[] veri = satir.split(",");
 
-
                         if (veri.length == 4) {
                             String kod = veri[0].trim();
                             String ad = veri[1].trim();
                             int kredi = Integer.parseInt(veri[2].trim());
                             String hocaAdi = veri[3].trim();
 
-
                             Course yeniDers = new Course(kod, ad, kredi);
-
-
                             Instructor hoca = new Instructor(999, hocaAdi, "Computer Science");
-
-
                             yeniDers.setInstructor(hoca);
-
 
                             ogrenci.registerCourse(yeniDers);
                             eklenenSayisi++;
@@ -136,9 +133,36 @@ public class Main {
                     System.out.println("Toplam " + eklenenSayisi + " ders ve hocası başarıyla yüklendi!");
 
                 } catch (IOException e) {
-                    System.out.println("Dosya okuma hatası: 'courses.csv' bulunamadı.");
+                    System.out.println("Dosya okuma hatası: Belirtilen yolda dosya bulunamadı.\n" + dosyaYolu);
                 } catch (NumberFormatException e) {
                     System.out.println("Veri hatası: Kredi sayı olmalı.");
+                }
+
+            } else if (secim == 5) {
+
+
+
+                String dosyaYolu = "C:\\Users\\Çağrı\\IdeaProjects\\CourseRegistrationSystem\\courses.csv";
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(dosyaYolu))) {
+
+                    for (Course ders : ogrenci.getCourses()) {
+
+                        String hocaAdi = (ders.getInstructor() != null) ? ders.getInstructor().getName() : "Atanmadi";
+
+                        String satir = ders.getCode() + "," +
+                                ders.getName() + "," +
+                                ders.getCredit() + "," +
+                                hocaAdi;
+
+                        writer.write(satir);
+                        writer.newLine();
+                    }
+
+                    System.out.println("Mevcut ders listeniz dosyaya başarıyla kaydedildi.");
+
+                } catch (IOException e) {
+                    System.out.println("Dosya yazma hatası oluştu: " + e.getMessage());
                 }
 
             } else if (secim == 0) {

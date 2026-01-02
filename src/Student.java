@@ -20,16 +20,20 @@ public class Student implements Registrable {
         return 4000.0;
     }
 
-    @Override
-    public void registerCourse(Course course) {
-        if (this.courses.contains(course)) {
-            System.out.println("HATA: " + this.name + " zaten " + course.getName() + " dersine kayıtlı!");
-        } else {
-            this.courses.add(course);
-            System.out.println(this.name + " isimli öğrenci " + course.getName() + " dersine başarıyla kayıt oldu.");
-        }
-    }
 
+    public void registerCourse(Course course) {
+
+        for (Course c : this.courses) {
+
+            if (c.getCode().equalsIgnoreCase(course.getCode())) {
+                System.out.println("UYARI: " + course.getCode() + " kodlu ders zaten listenizde var! Tekrar eklenmedi.");
+                return;
+            }
+        }
+
+        this.courses.add(course);
+        System.out.println(course.getCode() + " dersi başarıyla eklendi.");
+    }
 
 
     public boolean dropCourse(String courseCode) {

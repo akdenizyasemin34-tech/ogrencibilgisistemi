@@ -4,7 +4,6 @@ public class Course {
     private int credit;
     private Instructor instructor;
 
-
     public Course(String code, String name, int credit) {
         this.code = code;
         this.name = name;
@@ -12,28 +11,29 @@ public class Course {
     }
 
 
-    public void setInstructor(Instructor instructor) {
-
-        this.instructor = instructor;
-    }
-
-
-    public String getName() {
-
-        return name;
-    }
-
 
     public String getCode() {
         return code;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
     @Override
     public String toString() {
-
-        String hocaBilgisi = (instructor != null) ? " - Hoca: " + instructor.getName() : " - Hoca: Atanmadı";
-
-        return "[" + code + "] " + name + " (" + credit + " Kredi)" + hocaBilgisi;
+        return "Ders: " + code + " - " + name + " (" + credit + " kredi)";
     }
 }
